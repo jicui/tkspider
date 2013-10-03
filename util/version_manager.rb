@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 class ShapeBranch
-  def initialize(url,oldV,newV)
+  def initialize(url,oldVersion,newVersion)
     @url=url
-    @oldV=oldV
-    @newV=newV
+    @oldV=oldVersion
+    @newV=newVersion
     @poms=[]
   end
 
-  def prtVar
+  def printVariable
     p 'url='+@url+' old version='+@oldV+' new version='+@newV
   end
 
@@ -20,8 +20,8 @@ class ShapeBranch
     }
   end
 
-  def chgver
-    prtVar
+  def changeVersion
+    printVariable
     a=0
     #load poms
     p 'loading pom.xml'
@@ -46,4 +46,4 @@ end
 
 shapeBranch=ShapeBranch.new("C:\\dev\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp", '1.9-SNAPSHOT', '1.pb_fulfillment_revamp.0-SNAPSHOT')
 #shapeBranch=ShapeBranch.new("C:\\dev\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp","1.pb_fulfillment.0-SNAPSHOT","1.9-SNAPSHOT")
-shapeBranch.chgver
+shapeBranch.changeVersion
