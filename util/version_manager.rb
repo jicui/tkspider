@@ -43,7 +43,8 @@ class ShapeBranch
     p a.to_s+' pom.xml converted'
   end
 end
-
+exec 'ls'
+exec 'pwd'
 shapeBranch=ShapeBranch.new("C:\\dev\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp", '1.9-SNAPSHOT', '1.pb_fulfillment_revamp.0-SNAPSHOT')
 #shapeBranch=ShapeBranch.new("C:\\dev\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp","1.pb_fulfillment.0-SNAPSHOT","1.9-SNAPSHOT")
 shapeBranch.changeVersion
