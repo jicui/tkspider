@@ -6,7 +6,7 @@ class ShapeBranch
   end
 
   def printVariable
-    p 'target='+@target+' old version='+@oldV+' new version='+@newV
+    p "target=#{@target} old version=#{@oldV} new version=#{@newV}"
   end
 
   def loadPom(target)
@@ -46,7 +46,7 @@ class ShapeBranch
   end
 
   def rebase (from,to)
-    p4str='p4 integrate -i -Dt '<<from<<'... '<<to<<'...'
+    p4str="p4 integrate -i -Dt #{from}... #{to}..."
     p p4str
     exec p4str
   end
