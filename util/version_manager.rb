@@ -14,7 +14,7 @@ class ShapeBranch
       if e=='.'||e=='..'||e=='target' then next end
       _f=target+"\\"+e
       if e=='pom.xml' then @poms<<_f end
-      if File.directory? _f then  _loadPom _f end
+      if File.directory? _f then  loadPom _f end
     }
   end
 
@@ -36,7 +36,8 @@ class ShapeBranch
       buffer=file.gsub(/#{@oldV}/,@newV)
       if not File.writable? pom then
         #check out the file first
-        _p4editstr='p4 edit '<<pom
+        _p4editstr="p4 edit #{pom}"
+        p _p4editstr
         exec _p4editstr
       end
         File.write(pom,buffer)
@@ -45,17 +46,17 @@ class ShapeBranch
     p a.to_s+' pom.xml converted'
   end
 
-  def rebase (from,to)
+  def integrate (from,to)
     p4str="p4 integrate -i -Dt #{from}... #{to}..."
     p p4str
     exec p4str
   end
 end
-shapeBranch=ShapeBranch.new("C:\\Users\\jicui\\git\\p4\\sandbox\\jicui\\t2")
-#shapeBranch=ShapeBranch.new("C:\\dev\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp","1.pb_fulfillment.0-SNAPSHOT","1.9-SNAPSHOT")
-shapeBranch.changeVersion '1.pb_fulfillment_revamp.0-SNAPSHOT', '1.9-SNAPSHOT'
-exec 'p4 submit ' #can not submit?
-shapeBranch.rebase '//sandbox/jicui/t1/','//sandbox/jicui/t2/'
+shapeBranch=ShapeBranch.new("C:\\Users\\jicui\\git\\p4\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp")
+shapeBranch.changeVersion '1.24-SNAPSHOT','1.pb_fulfillment_revamp.0-SNAPSHOT'
+#shapeBranch.changeVersion '1.pb_fulfillment_revamp.0-SNAPSHOT', '1.20-SNAPSHOT'
+#exec 'p4 submit ' #can not submit?
+#shapeBranch.integrate '//sandbox/jicui/t1/','//sandbox/jicui/t2/'
 
 #add checkout functions
 #add merge back to main functions
