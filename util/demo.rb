@@ -1,1 +1,4 @@
-exec 'p4 login'
+opt="-l"
+puts `ls #{opt}`
+
+puts %x{ls #{opt}}
