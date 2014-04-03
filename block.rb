@@ -17,3 +17,5 @@ f.close
 f1=File.open "testfile"
 f1.each.with_index{|line,index| puts "this line #{index} is #{line}" }
 f1.close
+
+p `ruby --version`
