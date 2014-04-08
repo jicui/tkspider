@@ -8,51 +8,56 @@ program_desc 'Shape utility command line tool'
 
 version '0.0.1'
 
-desc 'Specify the p4 path for target shape project'
-arg_name 'path'
-default_value '//stubhub/domain/fulfillment/pb_fulfillment_revamp/'
-flag [:p,:p4_path]
 
 desc 'Be verbose'
 switch 'verbose'
 
-desc 'Add a new task to do'
-long_desc 'Add a new task to the list.  The task name can be specified with or without quotes'
-arg_name 'task name'
-command :add do |c|
- c.desc 'Make the new task the highest priority task'
- c.action do |global_options,options,args|
-   puts "global_options=#{global_options}"
-   puts "options=#{options}"
-   puts "args=#{args}"
-  end
-end
+desc "branch operatoins"
+long_desc "contains all the sub commands related to the branch operations"
+command (:branch) {|c|
+	
+	c.desc 'rebase the target branch with given branch'
+	c.command(:rebase){|rebase|
+		rebase.desc 'Specify the rebase from branch'
+		rebase.arg_name 'rebased from p4_path'
+		rebase.default_value '//stubhub/domain/fulfillment/main/'
+		rebase.flag [:rb,:rebase]
 
-desc "Rebase the branch from main"
-long_desc "Rebase the current branch from main to be ready from integration"
-arg_name "[rebase from p4 path]"
+		rebase.desc 'Specify the target branch'
+		rebase.arg_name 'rebase to p4_path'
+		rebase.default_value '//stubhub/domain/fulfillment/pb_fulfillment_revamp/'
+		rebase.flag [:tgt,:target]
 
-command (:rebase) {|c|
-	c.action {|global_options,options,args|
-		branch=global_options[:target_branch_path]
-		puts "target branch #{branch}"
-		to=args[0]
-		sp=ShapeBranch.new(branch)
-		sp.integrate(branch,to)
+		rebase.action{|global_options,options,args|
+			puts "global_options=#{global_options}"
+			puts "options=#{options}"
+			puts "args=#{args}"
+		}
+
+	}
+
+	c.desc 'update the given branch verison to from version1 to verison2'
+	c.long_desc 'update the give branch version to a new one ,this usuall apply before a rebase operation'
+	c.command(:updatevers){|updatevers|
+		updatevers.desc 'Specify the version one'
+		updatevers.arg_name 'version1'
+		updatevers.default_value 'default version1'
+		updatevers.flag [:v1,:version1]
+
+		updatevers.desc 'Specify the version two'
+		updatevers.arg_name 'version2'
+		updatevers.default_value 'default verison2'
+		updatevers.flag [:v2,:version2]
+
+		updatevers.action{|global_options,options,args|
+			puts "global_options=#{global_options}"
+			puts "options=#{options}"
+			puts "args=#{args}"
+		}
+
 	}
 }
 
-
-desc "Update the shape branch version"
-long_desc "Update the shape branch version,this should be done before rebase"
-arg_name "[old vesion name] [new version name]"
-
-command (:update_version) {|c|
-	c.action {|global_options,options,args|
-		#sp=ShapeBranch.new(args[0])
-
-	}
-}
 
  
 exit run(ARGV)
