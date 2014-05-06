@@ -21,17 +21,14 @@ command (:branch) {|c|
 		rebase.desc 'Specify the rebase from branch'
 		rebase.arg_name 'rebased from p4_path'
 		rebase.default_value '//stubhub/domain/fulfillment/main/'
-		rebase.flag [:rb,:rebase]
+		rebase.flag [:from]
 
-		rebase.desc 'Specify the target branch'
+		rebase.desc 'Specify the rebase to branch'
 		rebase.arg_name 'rebase to p4_path'
-		rebase.default_value '//stubhub/domain/fulfillment/pb_fulfillment_revamp/'
-		rebase.flag [:tgt,:target]
+		rebase.flag [:to]
 
 		rebase.action{|global_options,options,args|
-			puts "global_options=#{global_options}"
-			puts "options=#{options}"
-			puts "args=#{args}"
+			puts "rebase branch from=#{options[:from]} to=#{options[:to]}"
 		}
 
 	}
@@ -39,20 +36,13 @@ command (:branch) {|c|
 	c.desc 'update the given branch verison to from version1 to verison2'
 	c.long_desc 'update the give branch version to a new one ,this usuall apply before a rebase operation'
 	c.command(:updatevers){|updatevers|
-		updatevers.desc 'Specify the version one'
-		updatevers.arg_name 'version1'
-		updatevers.default_value 'default version1'
-		updatevers.flag [:v1,:version1]
-
-		updatevers.desc 'Specify the version two'
-		updatevers.arg_name 'version2'
-		updatevers.default_value 'default verison2'
-		updatevers.flag [:v2,:version2]
+		updatevers.desc 'Specify the target branch path'
+		updatevers.arg_name 'branchName'
+		updatevers.default_value '//stubhub/domain/fulfillment/pb_fulfillment_revamp/'
+		updatevers.flag [:path]
 
 		updatevers.action{|global_options,options,args|
-			puts "global_options=#{global_options}"
-			puts "options=#{options}"
-			puts "args=#{args}"
+			puts "update version for branch=#{options[:path]} from version=#{args[0]} to version=#{args[1]}"	
 		}
 
 	}
