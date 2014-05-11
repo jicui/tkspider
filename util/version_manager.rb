@@ -6,6 +6,11 @@ class ShapeBranch
     @poms=[]
   end
 
+  def initialize()
+    @target=nil
+    @poms=[]
+  end
+
   def printVariable
     puts "target=#{@target} old version=#{@oldV} new version=#{@newV}"
   end
@@ -18,7 +23,33 @@ class ShapeBranch
       if File.directory? _f then  loadPom _f end
     }
   end
+  def prompt(msg)
+    puts msg
+    STDIN.gets
+  end
 
+  def updateVersion(path,oldVersion,newVersion)
+    @target=path
+    @poms=[]
+      if(!path) then
+        path=while line=prompt("Input Path")
+          break(line.chomp) if line!="\n"
+          end
+      end
+      if(!oldVersion) then
+        oldVersion=while line= prompt("Input version1")
+          break(line.chomp) if line!="\n"
+        end 
+      end
+      if(!newVersion) then
+        newVersion=while line=prompt("Input verson2")
+          break(line.chomp) if line!="\n"
+        end 
+      end
+      puts "Start converting version  from #{oldVersion}  to #{newVersion} on #{path}"
+      #changeVersion(oldVersion,newVersion)
+  end
+  
   def changeVersion (oldVersion,newVersion)
     @oldV=oldVersion
     @newV=newVersion
@@ -60,5 +91,6 @@ end
 #shapeBranch.changeVersion '1.24-SNAPSHOT','1.pb_fulfillment_revamp.0-SNAPSHOT'
 #shapeBranch.changeVersion '1.pb_fulfillment_revamp.0-SNAPSHOT', '1.20-SNAPSHOT'
 #shapeBranch.integrate '//sandbox/jicui/t1/','//sandbox/jicui/t2/'
-
+#shapeBranch=ShapeBranch.new
+#shapeBranch.updateVersion "123",nil,nil
 #expose to gli

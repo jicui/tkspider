@@ -1,4 +1,4 @@
-opt="-l"
-puts `ls #{opt}`
-
-puts %x{ls #{opt}}
+while line=gets
+	puts line
+	break if line=="no"
+end

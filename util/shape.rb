@@ -42,7 +42,12 @@ command (:branch) {|c|
 		updatevers.flag [:path]
 
 		updatevers.action{|global_options,options,args|
-			puts "update version for branch=#{options[:path]} from version=#{args[0]} to version=#{args[1]}"	
+			_path=options[:path]
+			_v1=args[0]
+			_v2=args[1]
+			puts "update version for branch=#{_path} from version=#{_v1} to version=#{_v2}"
+			shapeBranch=ShapeBranch.new
+			shapeBranch.updateVersion(_path,_v1,_v2)
 		}
 
 	}
