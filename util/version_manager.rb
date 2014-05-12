@@ -47,13 +47,12 @@ class ShapeBranch
         end 
       end
       puts "Start converting version  from #{oldVersion}  to #{newVersion} on #{path}"
-      #changeVersion(oldVersion,newVersion)
+      changeVersion(oldVersion,newVersion)
   end
   
   def changeVersion (oldVersion,newVersion)
     @oldV=oldVersion
     @newV=newVersion
-    printVariable
     a=0
     #load poms
     p 'loading pom.xml'
@@ -78,8 +77,16 @@ class ShapeBranch
   end
 
   def integrate (from,to)
-    p4str="p4 integrate -i -Dt #{from}... #{to}..."
-    p p4str
+    if(!from) then 
+      from=while line=prompt("Input the from branch path")
+            break(line.chomp) if line!="\n"
+           end
+    end
+    if(!to) then
+      to=while line=prompt("Input the to branch path")
+            break(line.chomp) if line!="\n"
+          end
+    end
     `p4 integrate -i -Dt #{from}... #{to}...`
   end
 end

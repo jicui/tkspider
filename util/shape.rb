@@ -20,7 +20,6 @@ command (:branch) {|c|
 	c.command(:rebase){|rebase|
 		rebase.desc 'Specify the rebase from branch'
 		rebase.arg_name 'rebased from p4_path'
-		rebase.default_value '//stubhub/domain/fulfillment/main/'
 		rebase.flag [:from]
 
 		rebase.desc 'Specify the rebase to branch'
@@ -28,7 +27,10 @@ command (:branch) {|c|
 		rebase.flag [:to]
 
 		rebase.action{|global_options,options,args|
-			puts "rebase branch from=#{options[:from]} to=#{options[:to]}"
+			_from=options[:from]
+			_to=options[:to]
+			shapeBranch=ShapeBranch.new
+			shapeBranch.integrate(_from,_to)
 		}
 
 	}
@@ -36,16 +38,14 @@ command (:branch) {|c|
 	c.desc 'update the given branch verison to from version1 to verison2'
 	c.long_desc 'update the give branch version to a new one ,this usuall apply before a rebase operation'
 	c.command(:updatevers){|updatevers|
-		updatevers.desc 'Specify the target branch path'
+		updatevers.desc 'Specify the target local p4 path'
 		updatevers.arg_name 'branchName'
-		updatevers.default_value '//stubhub/domain/fulfillment/pb_fulfillment_revamp/'
 		updatevers.flag [:path]
 
 		updatevers.action{|global_options,options,args|
 			_path=options[:path]
 			_v1=args[0]
 			_v2=args[1]
-			puts "update version for branch=#{_path} from version=#{_v1} to version=#{_v2}"
 			shapeBranch=ShapeBranch.new
 			shapeBranch.updateVersion(_path,_v1,_v2)
 		}
