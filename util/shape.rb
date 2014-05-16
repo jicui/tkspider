@@ -13,7 +13,8 @@ desc 'Be verbose'
 switch 'verbose'
 
 desc "branch operatoins"
-long_desc "contains all the sub commands related to the branch operations"
+long_desc "contains all the sub commands related to the branch operations,\n 
+		   Note:make sure the current location is under the p4 client path"
 command (:branch) {|c|
 	
 	c.desc 'rebase the target branch with given branch'

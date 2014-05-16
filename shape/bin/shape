@@ -1,0 +1,88 @@
+#!/usr/bin/env ruby
+require 'gli'
+begin # XXX: Remove this begin/rescue before distributing your app
+require 'shape'
+rescue LoadError
+  STDERR.puts "In development, you need to use `bundle exec bin/shape` to run your app"
+  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+  STDERR.puts "Feel free to remove this message from bin/shape now"
+  exit 64
+end
+
+include GLI::App
+
+program_desc 'Describe your application here'
+
+version Shape::VERSION
+
+
+desc "branch operatoins"
+long_desc "contains all the sub commands related to the branch operations,\n 
+       Note:make sure the current location is under the p4 client path"
+command :branch do |c|
+  c.desc 'rebase the target branch with given branch'
+  c.command(:rebase) do |rebase|
+    rebase.desc 'Specify the rebase from branch'
+    rebase.arg_name 'rebased from p4_path'
+    rebase.flag [:from]
+
+    rebase.desc 'Specify the rebase to branch'
+    rebase.arg_name 'rebase to p4_path'
+    rebase.flag [:to]
+
+    rebase.action do |global_options,options,args|
+      _from=options[:from]
+      _to=options[:to]
+      shapeBranch=ShapeBranch.new
+      shapeBranch.integrate(_from,_to)
+    end
+  end
+
+  c.desc 'update the given branch verison to from version1 to verison2'
+  c.long_desc 'update the give branch version to a new one ,this usuall apply before a rebase operation'
+  c.command(:updatevers) do |updatevers|
+    updatevers.desc 'Specify the target local p4 path'
+    updatevers.arg_name 'branchName'
+    updatevers.flag [:path]
+
+    updatevers.action do |global_options,options,args|
+      _path=options[:path]
+      _v1=args[0]
+      _v2=args[1]
+      shapeBranch=ShapeBranch.new
+      shapeBranch.updateVersion(_path,_v1,_v2)
+    end
+  end
+end
+
+desc 'Domain operation'
+long_desc "Describe the domain operation with details information here"
+arg_name 'Describe arguments to domain here'
+command :domain do |c|
+  c.action do |global_options,options,args|
+    puts "domain command ran"
+  end
+end
+
+pre do |global,command,options,args|
+  # Pre logic here
+  # Return true to proceed; false to abort and not call the
+  # chosen command
+  # Use skips_pre before a command to skip this block
+  # on that command only
+  true
+end
+
+post do |global,command,options,args|
+  # Post logic here
+  # Use skips_post before a command to skip this
+  # block on that command only
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)

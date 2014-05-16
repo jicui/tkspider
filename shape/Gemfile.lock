@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    todo (0.0.1)
+    shape (0.0.1)
       gli (= 2.9.0)
 
 GEM
@@ -41,4 +41,4 @@ DEPENDENCIES
   aruba
   rake
   rdoc
-  todo!
+  shape!

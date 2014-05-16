@@ -1,6 +1,6 @@
-= todo
+= shape
 
 Describe your project here
 
-:include:todo.rdoc
+:include:shape.rdoc
 
