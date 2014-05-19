@@ -33,8 +33,7 @@ command :branch do |c|
     rebase.action do |global_options,options,args|
       _from=options[:from]
       _to=options[:to]
-      shapeBranch=ShapeBranch.new
-      shapeBranch.integrate(_from,_to)
+      Branch.integrate(_from,_to)
     end
   end
 
@@ -49,8 +48,7 @@ command :branch do |c|
       _path=options[:path]
       _v1=args[0]
       _v2=args[1]
-      shapeBranch=ShapeBranch.new
-      shapeBranch.updateVersion(_path,_v1,_v2)
+      Branch.updateVersion(_path,_v1,_v2)
     end
   end
 end

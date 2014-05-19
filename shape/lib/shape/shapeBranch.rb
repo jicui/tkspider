@@ -23,6 +23,7 @@ class ShapeBranch
       if File.directory? _f then  loadPom _f end
     }
   end
+
   def prompt(msg)
     puts msg
     STDIN.gets
