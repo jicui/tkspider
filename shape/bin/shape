@@ -48,7 +48,7 @@ command :branch do |c|
       _path=options[:path]
       _v1=args[0]
       _v2=args[1]
-      Branch.updateVersion(_path,_v1,_v2)
+      Branch.update_version(_path,_v1,_v2)
     end
   end
 end

@@ -1,5 +1,7 @@
 .tags
 tags
+*.iml
+/.idea
 /shape/pkg
 /shape/html
 .tags_sorted_by_file
