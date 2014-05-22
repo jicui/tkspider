@@ -1,5 +1,5 @@
-= shape
+= sci
 
 Generate this with
-    shape rdoc
+    sci rdoc
 After you have described your command line interface
