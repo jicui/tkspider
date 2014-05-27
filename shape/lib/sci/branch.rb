@@ -4,7 +4,7 @@ module Branch
     dir_poms=[]
     Dir.foreach(target) { |e|
       if e=='.'||e=='..'||e=='target' then next end
-      file_or_dir=target+"\\"+e
+      file_or_dir=target+"/"+e
       if e=='pom.xml' then dir_poms<<file_or_dir end
       if File.directory? file_or_dir then  dir_poms<<load_pom(file_or_dir) end
     }
