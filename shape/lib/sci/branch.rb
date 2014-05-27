@@ -4,7 +4,7 @@ module Branch
     dir_poms=[]
     Dir.foreach(target) { |e|
       if e=='.'||e=='..'||e=='target' then next end
-      file_or_dir=target+"/"+e
+      file_or_dir=target+"\\"+e
       if e=='pom.xml' then dir_poms<<file_or_dir end
       if File.directory? file_or_dir then  dir_poms<<load_pom(file_or_dir) end
     }
@@ -44,9 +44,11 @@ module Branch
     #loop pom and replace the old version
     allPoms.each do |pom|
       #search and replace
+      puts '111'
       file=File.read(pom)
       if file.scan(/#{oldVersion}/).length<=0 then next end
       buffer=file.gsub(/#{oldVersion}/,newVersion)
+      
       if not File.writable? pom then
         #check out the file first
         puts "p4 edit #{pom}"
@@ -73,3 +75,5 @@ module Branch
   end
 
 end
+
+shapeBranch=Branch.update_version("C:\\Users\\jicui\\git\\p4\\sandbox\\jicui\\t2","1.pb_fulfillment_revamp.0-SNAPSHOT","1.20-SNAPSHOT")

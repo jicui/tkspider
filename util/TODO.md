@@ -3,6 +3,7 @@ publish to gem repo done
 integrate gli to test the cli app done
 unit test for version manager.rb pending done
 refactor the shapeBranch.rb and move to the module based,and support unit test
-install on the company's machine to test how this works
+install on the company's machine to test how this works on linux and windows
 add function to list all domain api dashboard
 
+error: no implicit conversion of Array into String
