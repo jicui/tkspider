@@ -6,7 +6,7 @@ module Branch
       if e=='.'||e=='..'||e=='target' then next end
       file_or_dir=target+"\\"+e
       if e=='pom.xml' then dir_poms<<file_or_dir end
-      if File.directory? _f then  dir_poms<<loadPom(file_or_dir) end
+      if File.directory? file_or_dir then  dir_poms<<load_pom(file_or_dir) end
     }
     return dir_poms;
   end
@@ -19,19 +19,19 @@ module Branch
 
   def Branch.update_version(path,oldVersion,newVersion)
     if(!path) then
-      path=while line=prompt("Please input Path")
+      path=while line=prompt("Please input local p4 Path")
              break(line.chomp) if line!="\n"
            end
     end
 
     if(!oldVersion) then
-      oldVersion=while line= prompt("Please input version1")
+      oldVersion=while line= prompt("Please input old version")
                    break(line.chomp) if line!="\n"
                  end
     end
 
     if(!newVersion) then
-      newVersion=while line=prompt("Please input verson2")
+      newVersion=while line=prompt("Please input new version")
                    break(line.chomp) if line!="\n"
                  end
     end

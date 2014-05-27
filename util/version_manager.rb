@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
 class ShapeBranch
   attr:target
-  def initialize(target)
-    @target=target
-    @poms=[]
-  end
 
   def initialize()
     @target=nil
@@ -94,10 +90,10 @@ end
 #shapeBranch=ShapeBranch.new("C:\\Users\\jicui\\git\\p4\\sandbox\\jicui\\t2")
 #shapeBranch.changeVersion("1.pb_fulfillment_revamp.0-SNAPSHOT","1.20-SNAPSHOT")
 #shapeBranch.changeVersion("1.20-SNAPSHOT","1.pb_fulfillment_revamp.0-SNAPSHOT")
-#shapeBranch=ShapeBranch.new("C:\\Users\\jicui\\git\\p4\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp")
-#shapeBranch.changeVersion '1.24-SNAPSHOT','1.pb_fulfillment_revamp.0-SNAPSHOT'
-#shapeBranch.changeVersion '1.pb_fulfillment_revamp.0-SNAPSHOT', '1.20-SNAPSHOT'
-#shapeBranch.integrate '//sandbox/jicui/t1/','//sandbox/jicui/t2/'
+shapeBranch=ShapeBranch.new
+shapeBranch.updateVersion("C:\\Users\\jicui\\git\\p4\\stubhub\\domain\\fulfillment\\pb_fulfillment_revamp","1.28-SNAPSHOT","1.pb_fulfillment_revamp.0-SNAPSHOT")
+#shapeBranch.changeVersion('1.pb_fulfillment_revamp.0-SNAPSHOT', '1.28-SNAPSHOT')
+#shapeBranch.integrate '//stubhub/domain/fulfillment/pb_fulfillment_revamp/','//stubhub/domain/fulfillment/main/'
 #shapeBranch=ShapeBranch.new
 #shapeBranch.updateVersion "123",nil,nil
 #expose to gli
