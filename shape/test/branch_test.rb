@@ -1,5 +1,5 @@
 require "test/unit"
-require_relative "../lib/shape/branch.rb"
+require_relative "../lib/sci/branch.rb"
 class BranchTest < Test::Unit::TestCase
 
   # Called before every test method runs. Can be used
