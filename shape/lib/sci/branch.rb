@@ -1,12 +1,12 @@
 module Branch
 
   def Branch.load_pom(target)
-    dir_poms=[]
+    dir_poms=Array.new
     Dir.foreach(target) { |e|
       if e=='.'||e=='..'||e=='target' then next end
       file_or_dir=target+"/"+e
-      if e=='pom.xml' then dir_poms<<file_or_dir end
-      if File.directory? file_or_dir then  dir_poms<<Branch.load_pom(file_or_dir) end
+      if e=='pom.xml' then dir_poms.push(file_or_dir) end
+      if File.directory? file_or_dir then  dir_poms+=Branch.load_pom(file_or_dir) end
     }
     return dir_poms;
   end
@@ -42,6 +42,7 @@ module Branch
     allPoms=Branch.load_pom(path)
     puts allPoms.length.to_s+"pom.xml loaded"
     #loop pom and replace the old version
+
     allPoms.each do |pom|
       #search and replace
       puts pom
@@ -77,5 +78,4 @@ module Branch
 
 end
 
-shapeBranch=Branch.update_version("/home/jicui/git/tkspider/util","123","111")
-`ruby -version`
+#shapeBranch=Branch.update_version("/home/jicui/git/tkspider/util","111","123") 

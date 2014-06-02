@@ -1,4 +1,2 @@
-while line=gets
-	puts line
-	break if line=="no"
-end
+p=[1,2,3,4]+[4,5]
+puts p
