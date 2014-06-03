@@ -2,5 +2,5 @@
 
 Describe your project here
 
-:include:shape.rdoc
+:include:sci.rdoc
 

@@ -4,7 +4,7 @@ module Branch
     dir_poms=Array.new
     Dir.foreach(target) { |e|
       if e=='.'||e=='..'||e=='target' then next end
-      file_or_dir=target+"/"+e
+      file_or_dir=File.join(target,e)
       if e=='pom.xml' then dir_poms.push(file_or_dir) end
       if File.directory? file_or_dir then  dir_poms+=Branch.load_pom(file_or_dir) end
     }
@@ -45,8 +45,6 @@ module Branch
 
     allPoms.each do |pom|
       #search and replace
-      puts pom
-      puts pom.class
       file=File.read(pom)
       if file.scan(/#{oldVersion}/).length<=0 then next end
       buffer=file.gsub(/#{oldVersion}/,newVersion)
@@ -78,4 +76,4 @@ module Branch
 
 end
 
-#shapeBranch=Branch.update_version("/home/jicui/git/tkspider/util","111","123") 
+shapeBranch=Branch.update_version("/home/jicui/git/tkspider/util","111","123") 
